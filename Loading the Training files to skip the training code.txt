@@ -1,0 +1,40 @@
+from IPython.display import display
+from ipywidgets import FileUpload
+
+uploader = FileUpload(
+    accept='.pth,.csv',
+    multiple=True
+)
+
+display(uploader)
+
+import os
+
+save_dir = "/kaggle/working"
+
+for filename, fileinfo in uploader.value.items():
+
+    filepath = os.path.join(
+        save_dir,
+        filename
+    )
+
+    with open(filepath, "wb") as f:
+        f.write(fileinfo["content"])
+
+    print(f"Saved: {filepath}")
+
+print("\nAll files uploaded successfully.")
+
+import os
+
+for file in os.listdir("/kaggle/working"):
+    print(file)
+	
+Output - customcnn_best_model.pth
+resnet18_best_model.pth
+vgg19_best_model.pth
+customcnn_history.pth
+resnet18_history.pth
+vgg19_history.pth
+final_model_comparison.csv
